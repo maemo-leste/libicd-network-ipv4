@@ -7,7 +7,7 @@ ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
 	confflags += --enable-log-stderr
 endif
 
-DEB_CONFIGURE_EXTRA_FLAGS = --prefix=/usr --sysconfdir=/etc $(confflags)
+DEB_CONFIGURE_EXTRA_FLAGS = --prefix=/usr --sysconfdir=/etc $(confflags) --disable-static
 
 # default flags
 CFLAGS += -g -O2
