@@ -1,0 +1,15 @@
+Source: libicd-network-ipv4
+Priority: optional
+Maintainer: Ivaylo Dimitrov <ivo.g.dimitrov.75@gmail.com>
+Build-Depends: debhelper (>> 3.0.0), autotools-dev,
+ libglib2.0-dev, libgconf2-dev,
+ icd2-dev, icd2-osso-ic-dev
+Standards-Version: 3.7.2
+Section: net
+
+Package: libicd-network-ipv4
+Section: net
+Architecture: any
+Depends: icd2, ${shlibs:Depends}
+Description: ICd2 ipv4 network configuration module
+ ICd2 ipv4 network configuration module
