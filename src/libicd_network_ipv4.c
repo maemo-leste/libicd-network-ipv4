@@ -23,6 +23,7 @@
 #include "icd/support/icd_log.h"
 #include "icd/network_api.h"
 
+#define RESOLV_CONF_FILE "/var/run/resolv.conf"
 static gchar *_icd_gconf_get_iap_string(const char *iap_name, const char *key_name);
 static gboolean _icd_gconf_get_iap_bool(const char *iap_name, const char *key_name, gboolean def);
 
@@ -378,7 +379,7 @@ icd_ipv4_clear_network_data(ipv4_network_data *network_data)
 
   if (network_data->interface_name)
   {
-    gchar *resolv_conf_file = g_strdup_printf("/tmp/resolv.conf.%s",
+    gchar *resolv_conf_file = g_strdup_printf(RESOLV_CONF_FILE".%s",
                                               network_data->interface_name);
     ILOG_DEBUG("ipv4 removing '%s'", resolv_conf_file);
     unlink(resolv_conf_file);
@@ -579,7 +580,7 @@ icd_ipv4_set_dns(ipv4_network_data *network_data)
 
   if (network_data->interface_name)
   {
-    gchar *resolv_conf_name = g_strdup_printf("/tmp/resolv.conf.%s",
+    gchar *resolv_conf_name = g_strdup_printf(RESOLV_CONF_FILE".%s",
                                               network_data->interface_name);
     int fd = creat(resolv_conf_name, 0444);
 
@@ -969,7 +970,7 @@ ipv4_ip_get_ipinfo(const char *ifname, const char *ifindex, ipv4_ipinfo *ipinfo)
   }
 
 get_dns:
-  resolv_conf_name = g_strconcat("/tmp/resolv.conf", ".", ifname, NULL);
+  resolv_conf_name = g_strconcat(RESOLV_CONF_FILE, ".", ifname, NULL);
 
   if (!icd_ipv4_ip_info_dns(resolv_conf_name, ipinfo))
   {
@@ -978,12 +979,12 @@ get_dns:
     if (iface)
     {
       g_free(resolv_conf_name);
-      resolv_conf_name = g_strconcat("/tmp/resolv.conf", ".", iface, NULL);
+      resolv_conf_name = g_strconcat(RESOLV_CONF_FILE, ".", iface, NULL);
       dns_got = icd_ipv4_ip_info_dns(resolv_conf_name, ipinfo);
     }
 
     if (!dns_got)
-      icd_ipv4_ip_info_dns("/tmp/resolv.conf", ipinfo);
+      icd_ipv4_ip_info_dns(RESOLV_CONF_FILE, ipinfo);
   }
 
   g_free(resolv_conf_name);
