@@ -60,7 +60,7 @@ else
 fi
 AM_CONDITIONAL(DOXYGEN_DOCS_ENABLED, [test x$DOXYGEN != x])
 
-CFLAGS="$CFLAGS -Wall -Werror -Wmissing-prototypes"
+CFLAGS="$CFLAGS -Wall -Werror -Wno-missing-prototypes"
 CFLAGS="$CFLAGS -include config.h"
 
 

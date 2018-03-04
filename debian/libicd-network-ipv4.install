@@ -1,3 +1,0 @@
-etc/maemo-dhcp.d/50_ipv4_network_setup
-etc/udhcpc/libicd_network_ipv4.script
-usr/lib/icd2/libicd_network_ipv4.so

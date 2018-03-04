@@ -18,10 +18,10 @@
 #include <arpa/inet.h>
 
 
-#include "icd_dbus.h"
-#include "icd_gconf.h"
-#include "icd_log.h"
-#include "network_api.h"
+#include "icd/support/icd_dbus.h"
+#include "icd/icd_gconf.h"
+#include "icd/support/icd_log.h"
+#include "icd/network_api.h"
 
 static gchar *_icd_gconf_get_iap_string(const char *iap_name, const char *key_name);
 static gboolean _icd_gconf_get_iap_bool(const char *iap_name, const char *key_name, gboolean def);
@@ -731,7 +731,7 @@ icd_ipv4_ip_up(const gchar *network_type, const guint network_attrs,
   }
 }
 
-void
+static void
 icd_ipv4_child_exit(const pid_t pid, const gint exit_value, gpointer *private)
 {
   ipv4_private *priv = (ipv4_private *)*private;
