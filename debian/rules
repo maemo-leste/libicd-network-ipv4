@@ -12,6 +12,9 @@ DEB_CONFIGURE_EXTRA_FLAGS = --prefix=/usr --sysconfdir=/etc $(confflags) --disab
 # default flags
 CFLAGS += -g -O2
 
+override_dh_auto_install:
+	dh_auto_install --destdir=debian/tmp
+
 configure: configure.ac debian/changelog
 	./autogen.sh
 
