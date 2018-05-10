@@ -1,3 +1,10 @@
+libicd-network-ipv4 (0.25.1) unstable; urgency=medium
+
+  * make sure network scripts have their executable bits set
+  * icd_ipv4_connected: add missing parameter to ip_up_cb
+
+ -- Ivaylo Dimitrov <ivo.g.dimitrov.75@gmail.com>  Thu, 10 May 2018 21:16:43 +0300
+
 libicd-network-ipv4 (0.25) unstable; urgency=medium
 
   * Initial RE release
