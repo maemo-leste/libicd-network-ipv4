@@ -855,6 +855,8 @@ err:
 static gboolean
 icd_ipv4_connected(ipv4_network_data *network_data)
 {
+  static const char *const env_vars[] = {"ADDRFAM=inet", NULL};
+
   if (network_data->configured)
     return FALSE;
 
@@ -873,7 +875,8 @@ icd_ipv4_connected(ipv4_network_data *network_data)
   else
     method = "METHOD=static";
 
-  network_data->ip_up_cb(0, 0, network_data->ip_up_cb_token);
+  network_data->ip_up_cb(ICD_NW_SUCCESS, NULL, network_data->ip_up_cb_token,
+                         env_vars, NULL);
 
   return TRUE;
 }
