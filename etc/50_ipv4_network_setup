@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # udhcpc script to use with ICD
 
 RESOLV_CONF="/var/run/resolv.conf.$interface"
