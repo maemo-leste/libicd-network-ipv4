@@ -10,6 +10,6 @@ Section: net
 Package: libicd-network-ipv4
 Section: net
 Architecture: any
-Depends: icd2, ${shlibs:Depends}
+Depends: icd2, udhcpc, ${shlibs:Depends}
 Description: ICd2 ipv4 network configuration module
  ICd2 ipv4 network configuration module
