@@ -1,3 +1,9 @@
+libicd-network-ipv4 (0.25.3) unstable; urgency=medium
+
+  * Revert back to POSIX sh instead of bash
+
+ -- Merlijn Wajer <merlijn@wizzup.org>  Wed, 23 May 2018 15:00:00 +0200
+
 libicd-network-ipv4 (0.25.2) unstable; urgency=medium
 
   * 50_ipv4_network_setup: use bash in shebang
