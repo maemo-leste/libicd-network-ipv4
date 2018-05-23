@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # udhcpc script to use with ICD
 
 RESOLV_CONF="/var/run/resolv.conf.$interface"
@@ -46,7 +46,7 @@ static | bound | renew)
 		      succeeded=yes
 		  else
 		      /sbin/route add default gw $i dev $interface
-		      if [ "$?" == 0 ]
+		      if [ "$?" = 0 ]
 		      then
 			  succeeded=yes
 		      fi
@@ -90,7 +90,7 @@ static | bound | renew)
 	    com.nokia.icd.autoconf.autoconf_changed \
 	    string:$interface string:DHCP string:CONNECTED
 
-	if [ "$1" = bound -o "$1" = renew ]; then
+	if [ "$1" = bound ] || [ "$1" = renew ]; then
 	    echo "${interface} ${ip} ${router} ${subnet} ${domain} ${dns}" > $LEASE_PARAMS
 	fi
 	;;
