@@ -227,8 +227,10 @@ ipv4_stats_get(const gchar *interface, guint *rx_packets, guint *tx_packets,
   if (!fp)
     return FALSE;
 
-  fgets(s, sizeof(s), fp);
-  fgets(s, sizeof(s), fp);
+  if (!fgets(s, sizeof(s), fp))
+    goto err;
+  if (!fgets(s, sizeof(s), fp))
+    goto err;
 
   if (!strstr(s, "compressed"))
   {
@@ -954,7 +956,12 @@ ipv4_ip_get_ipinfo(const char *ifname, const char *ifindex, ipv4_ipinfo *ipinfo)
 
   if (fp)
   {
-    fgets(buf, 256, fp);
+    if (!fgets(buf, 256, fp))
+    {
+      ipinfo->gateway.s_addr = 0;
+      fclose(fp);
+      goto get_dns;
+    }
 
     while (fgets(buf, sizeof(buf), fp))
     {
