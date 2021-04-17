@@ -1,3 +1,4 @@
 usr/lib/icd2/libicd_network_ipv4.so
 etc/maemo-dhcp.d/*
 etc/udhcpc/*
+etc/dnsmasq.d/*
