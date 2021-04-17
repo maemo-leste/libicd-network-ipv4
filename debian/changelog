@@ -1,3 +1,10 @@
+libicd-network-ipv4 (0.26.0) unstable; urgency=medium
+
+  * Add dnsmasq dependency.
+  * Dont bindly assume fgets succeeds.
+
+ -- Ivan J. <parazyd@dyne.org>  Sat, 17 Apr 2021 12:47:18 +0200
+
 libicd-network-ipv4 (0.25.3) unstable; urgency=medium
 
   * Revert back to POSIX sh instead of bash
