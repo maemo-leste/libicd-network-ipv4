@@ -1,7 +1,6 @@
 #!/bin/sh
 # udhcpc script to use with ICD
 
-RESOLV_CONF="/var/run/resolv.conf.$interface"
 LEASE_PARAMS=/var/run/dhcp-params.conf
 
 case "$1" in
@@ -62,26 +61,22 @@ static | bound | renew)
 	    fi
 	fi
 
-	for ns in $dns
+	R=""
+	if [ -n "$domain" ]
+	then
+		R="${R}domain $domain
+"
+	fi
+	for i in $dns
 	do
-	  if egrep "^nameserver[\t ]*${ns}" $RESOLV_CONF > /dev/null
-	  then
-	      continue
-	  else
-	      echo -n > $RESOLV_CONF.tmp
-	      [ -n "$domain" ] && echo domain $domain >> $RESOLV_CONF.tmp
-	      for i in $dns
-	      do
-		echo nameserver $i >> $RESOLV_CONF.tmp
-	      done
-
-	      mv $RESOLV_CONF.tmp $RESOLV_CONF
-
-	      # Clear dnsmasq cache after getting new nameservers
-	      kill -SIGHUP `pidof dnsmasq`
-	      break
-	  fi
+		R="${R}nameserver $i
+"
 	done
+
+	echo -n "$R" | /sbin/resolvconf -a "${interface}.udhcpc"
+
+	# Clear dnsmasq cache after getting new nameservers
+	kill -SIGHUP `pidof dnsmasq`
 
 	/usr/bin/dbus-send \
 	    --system \
@@ -96,6 +91,7 @@ static | bound | renew)
 	;;
 deconfig)
 	/sbin/ifconfig $interface 0.0.0.0
+	/sbin/resolvconf -d "$interface.udhcpc" || true
 	rm -f $LEASE_PARAMS > /dev/null
 	/usr/bin/dbus-send \
 	    --system \

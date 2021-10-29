@@ -1,3 +1,9 @@
+libicd-network-ipv4 (0.27.0) unstable; urgency=medium
+
+  * Support resolvconf
+
+ -- Merlijn Wajer <merlijn@wizzup.org>  Fri, 29 Oct 2021 10:22:46 +0200
+
 libicd-network-ipv4 (0.26.0) unstable; urgency=medium
 
   * Add dnsmasq dependency.
