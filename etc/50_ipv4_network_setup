@@ -67,11 +67,21 @@ static | bound | renew)
 		R="${R}domain $domain
 "
 	fi
+
+	D=""
 	for i in $dns
 	do
-		R="${R}nameserver $i
+		D="${D}nameserver $i
 "
 	done
+
+	# Let's just pick a default if none were provided... Quad9 seems better
+	# than google and cloudflare at least.
+	if [ -z "$D" ]
+	then
+		D="${D}nameserver 9.9.9.9
+"
+	fi
 
 	echo -n "$R" | /sbin/resolvconf -a "${interface}.udhcpc"
 
