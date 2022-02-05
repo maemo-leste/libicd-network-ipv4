@@ -1,3 +1,9 @@
+libicd-network-ipv4 (0.28.0) unstable; urgency=medium
+
+  * Add fallback DNS server 9.9.9.9 ("Quad 9") if none was provided
+
+ -- Merlijn Wajer <merlijn@wizzup.org>  Sat, 05 Feb 2022 21:06:10 +0100
+
 libicd-network-ipv4 (0.27.0) unstable; urgency=medium
 
   * Support resolvconf
