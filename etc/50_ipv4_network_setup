@@ -82,6 +82,7 @@ static | bound | renew)
 		D="${D}nameserver 9.9.9.9
 "
 	fi
+	R="${R}${D}"
 
 	echo -n "$R" | /sbin/resolvconf -a "${interface}.udhcpc"
 
