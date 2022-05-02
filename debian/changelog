@@ -1,3 +1,10 @@
+libicd-network-ipv4 (0.29.1) unstable; urgency=medium
+
+  * Workaround libicd-network-ofono probably (?) passing invalid dns servers
+    sometimes
+
+ -- Merlijn Wajer <merlijn@wizzup.org>  Mon, 02 May 2022 14:17:20 +0200
+
 libicd-network-ipv4 (0.29.0) unstable; urgency=medium
 
   * Fix fallback setting
