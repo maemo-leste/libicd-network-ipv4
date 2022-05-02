@@ -71,8 +71,11 @@ static | bound | renew)
 	D=""
 	for i in $dns
 	do
-		D="${D}nameserver $i
+		if [ -n "$i" && "$i" != "0.0.0.0" ]
+		then
+			D="${D}nameserver $i
 "
+		fi
 	done
 
 	# Let's just pick a default if none were provided... Quad9 seems better
