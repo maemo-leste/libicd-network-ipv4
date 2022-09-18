@@ -90,7 +90,7 @@ static | bound | renew)
 	echo -n "$R" | /sbin/resolvconf -a "${interface}.udhcpc"
 
 	# Clear dnsmasq cache after getting new nameservers
-	kill -s SIGHUP `pidof dnsmasq`
+	kill -s HUP `pidof dnsmasq`
 
 	/usr/bin/dbus-send \
 	    --system \
