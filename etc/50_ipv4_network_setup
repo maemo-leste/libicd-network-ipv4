@@ -6,9 +6,6 @@ LEASE_PARAMS=/var/run/dhcp-params.conf
 case "$1" in
 
 static | bound | renew)
-	[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
-	[ -n "$subnet" ] && NETMASK="netmask $subnet"
-
 	if [ "$1" = renew ]; then
 	    if [ -f $LEASE_PARAMS ]; then
 		head -1 $LEASE_PARAMS | grep "^${interface} ${ip} ${router} ${subnet} ${domain} ${dns}$" > /dev/null
@@ -18,14 +15,10 @@ static | bound | renew)
 	    fi
 	fi
 
-	/sbin/ifconfig $interface $ip $BROADCAST $NETMASK
+	/bin/ip address add $ip/$subnet dev $interface
 
 	if [ -n "$router" ]
 	then
-	    if netstat -rn | egrep "^0.0.0.0 *${router} .*${interface}$" > /dev/null
-	    then
-		:
-	    else
 		/bin/ip route del default
 
 		router_rev=""
@@ -37,16 +30,11 @@ static | bound | renew)
 		succeeded=no
 		for i in $router_rev
 		do
-		  if netstat -rn | egrep "^0.0.0.0 *${i} .*${interface}$" > /dev/null
-		  then
-		      succeeded=yes
-		  else
 		      /bin/ip route add default via $i dev $interface
 		      if [ "$?" = 0 ]
 		      then
 			  succeeded=yes
 		      fi
-		  fi
 		done
 
 		if [ $succeeded != yes ]
@@ -54,8 +42,6 @@ static | bound | renew)
 		    echo -n "Failed to set up default route for " >&2
 		    echo "$interface: $ip/$subnet broadcast $broadcast" >&2
 		fi
-
-	    fi
 	fi
 
 	R=""
@@ -101,7 +87,7 @@ static | bound | renew)
 	fi
 	;;
 deconfig)
-	/sbin/ifconfig $interface 0.0.0.0
+	/bin/ip address flush dev $interface
 	/sbin/resolvconf -d "$interface.udhcpc" || true
 	rm -f $LEASE_PARAMS > /dev/null
 	/usr/bin/dbus-send \
