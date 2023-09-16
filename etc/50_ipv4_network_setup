@@ -26,10 +26,7 @@ static | bound | renew)
 	    then
 		:
 	    else
-	        while /sbin/route del default gw 0.0.0.0 dev $interface
-		do
-		  :
-		done
+		/bin/ip route del default
 
 		router_rev=""
 		for i in $router
@@ -44,7 +41,7 @@ static | bound | renew)
 		  then
 		      succeeded=yes
 		  else
-		      /sbin/route add default gw $i dev $interface
+		      /bin/ip route add default via $i dev $interface
 		      if [ "$?" = 0 ]
 		      then
 			  succeeded=yes
