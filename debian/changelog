@@ -1,3 +1,9 @@
+libicd-network-ipv4 (0.29.4) unstable; urgency=medium
+
+  * Use iproute2
+
+ -- Merlijn Wajer <merlijn@wizzup.org>  Mon, 13 Nov 2023 00:04:36 +0100
+
 libicd-network-ipv4 (0.29.3) unstable; urgency=medium
 
   * make etc/50_ipv4_network_setup POSIX compliant
