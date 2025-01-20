@@ -633,7 +633,7 @@ icd_ipv4_exec_dhcp(ipv4_network_data *network_data)
         execl("/sbin/udhcpc", "/sbin/udhcpc",
               "-i", network_data->interface_name,
               "-s", "/etc/udhcpc/libicd_network_ipv4.script",
-              "-H", hostname, "-f", "-R", "15", NULL);
+              "-H", g_strdup("hostname:", hostname), "-f", "-R", "15", NULL);
       }
       else
       {
