@@ -1,3 +1,9 @@
+libicd-network-ipv4 (0.29.5) unstable; urgency=medium
+
+  * Newer udhcpc syntax
+
+ -- Merlijn Wajer <merlijn@wizzup.org>  Mon, 20 Jan 2025 18:54:39 +0100
+
 libicd-network-ipv4 (0.29.4) unstable; urgency=medium
 
   * Use iproute2
